@@ -1,0 +1,49 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/wpf-todo-app;component/Themes/BackgroundResource.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="ListViewItem" x:Key="CalendarDayItem_Style">
+
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True" x:Name="IsSelected">
+                <Setter Property="Background" Value="Gray"/>
+            </Trigger>
+        </Style.Triggers>
+
+
+        <Setter Property="Background" Value="#393B40"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <StackPanel Orientation="Vertical">
+
+                        <Label Content="{Binding DayOfWeek}"
+                                   Foreground="White"
+                                   FontSize="8"/>
+
+                        <Grid>
+
+                            <Ellipse Width="12" Height="12">
+                                <Ellipse.Fill>
+                                    <!--selectionItemBrush here-->
+                                    <SolidColorBrush Color="AliceBlue"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+
+                            <TextBlock Text="{Binding DateOfMonth}"
+                                           FontSize="10"
+                                           Foreground="Black"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"/>
+                        </Grid>
+
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

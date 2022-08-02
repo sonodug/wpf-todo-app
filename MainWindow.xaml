@@ -4,9 +4,123 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpf_todo_app"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        xmlns:vm="clr-namespace:wpf_todo_app.ViewModel"
+        DataContext="{Binding MainViewModel, Source={StaticResource ViewModelLocator}}"
+        mc:Ignorable="d" 
+        Title="MainWindow" Height="600" Width="400"
+        Background="{DynamicResource backgroundBrush}"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        BorderThickness="0"
+        AllowsTransparency="True"
+        ResizeMode="NoResize">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="./Themes/BackgroundResource.xaml"/>
+                <ResourceDictionary Source="./Styles/Buttons_Styles.xaml"/>
+                <ResourceDictionary Source="./Styles/CalendarDaysView_Style.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.065*"/>
+            <RowDefinition Height="0.085*"/>
+            <RowDefinition Height="0.085*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.1*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.3*"/>
+            <ColumnDefinition Width="0.3*"/>
+            <ColumnDefinition Width="0.3*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Row="0" Grid.ColumnSpan="3"
+                BorderBrush="Wheat"
+                BorderThickness="0,0,0,0.2">
+            
+            <StackPanel HorizontalAlignment="Right"
+                        Orientation="Horizontal"
+                        Margin="0,0,0,0">
+
+                <Button Width="30" Height="27"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource WindowConfigureButton_Style}"
+                        Content="─"
+                        Padding="0,0,0,4"
+                        FontSize="12"/>
+                
+                <Button Width="30" Height="27"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource WindowConfigureButton_Style}"
+                        Content="✕"
+                        FontSize="10"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1" Grid.ColumnSpan="3"
+                BorderBrush="Wheat"
+                BorderThickness="0,0,0,0.3"/>
+
+        <Border Grid.Row="1" Grid.Column="0">
+
+            <Button Width="30" Height="30"
+                    Style="{StaticResource HeaderButton_Style}"
+                    HorizontalAlignment="Left"
+                    Margin="15,0,0,0">
+
+                <Image Width="16" Height="20" 
+                       Source="./Assets/icons8-menu-250.png"
+                       Opacity="0.7"/>
+            </Button>
+        </Border>
+
+        <Border Grid.Row="1" Grid.Column="1">
+            
+            <TextBlock Text="August"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="18"
+                       Foreground="Wheat"/>
+        </Border>
+
+        <Border Grid.Row="1" Grid.Column="2">
+
+            <Button Width="30" Height="30"
+                    Style="{StaticResource HeaderButton_Style}"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,5,0">
+
+                <Image Width="20" Height="20" 
+                       Source="./Assets/icons8-terminal-100.png"
+                       Opacity="0.7"/>
+            </Button>
+        </Border>
+
+        <Border Grid.Row="2" Grid.ColumnSpan="3"
+                BorderBrush="Wheat"
+                BorderThickness="0,0,0,0.2"/>
+
+        <Grid Grid.Row="2" Grid.ColumnSpan="3"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center">
+
+            <ListView ItemsSource="{Binding CalendarDaysItems}"
+                          SelectedItem="{Binding SelectedCalendarDay}"
+                          Background="Transparent"
+                          BorderThickness="0"
+                          ItemContainerStyle="{StaticResource CalendarDayItem_Style}">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"></StackPanel>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
+        </Grid>
     </Grid>
 </Window>
